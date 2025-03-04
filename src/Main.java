@@ -43,13 +43,7 @@ public class Main {
         String dishType = scanner.nextLine();
         System.out.println("Введите название блюда:");
         String dishName = scanner.nextLine();
-        if(dc.checkType(dishType)) {
-            dc.addNewDish(dishType,dishName);
-        } else {
-            dc.addNewType(dishType);
-            dc.addNewDish(dishType,dishName);
-        }
-        System.out.println(dc.dishesList);
+        dc.addNewDish(dishType, dishName);
     }
 
     private static void generateDishCombo() {
@@ -58,10 +52,10 @@ public class Main {
         int numberOfCombos = Integer.parseInt(scanner.nextLine());
 
         System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
-
+        String nextItem = scanner.nextLine();
         ArrayList<String> dishType = new ArrayList<>();//реализуйте ввод типов блюд
-        while (true) {
-            String nextItem = scanner.nextLine();
+        while(!nextItem.isEmpty()) {
+            nextItem = scanner.nextLine();
             if (nextItem.isEmpty()) {
                 break;
             } else {
