@@ -1,15 +1,17 @@
 import java.util.ArrayList;
-import  java.util.Random;
+import java.util.Random;
 import java.util.Scanner;
+
 public class Main {
 
     static DinnerConstructor dc;
     static Scanner scanner;
-    static Random random;
+
+    //static Random random;
     public static void main(String[] args) {
         dc = new DinnerConstructor();
         scanner = new Scanner(System.in);
-        random = new Random();
+        //random = new Random();
 
         while (true) {
             printMenu();
@@ -54,7 +56,7 @@ public class Main {
         System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
         String nextItem = scanner.nextLine();
         ArrayList<String> dishType = new ArrayList<>();//реализуйте ввод типов блюд
-        while(!nextItem.isEmpty()) {
+        while (!nextItem.isEmpty()) {
             nextItem = scanner.nextLine();
             if (nextItem.isEmpty()) {
                 break;
@@ -71,19 +73,10 @@ public class Main {
                 continue;
             }
         }
-        for (int i = 0; i < numberOfCombos; i++) {
-            System.out.println("Для набора Комбо №" + (i + 1) + " предлагаются следующие блюда:");
-            for (int j = 0; j < dishType.size(); j++) {
-                String type = dishType.get(j);
-                int bound = dc.dishesList.get(type).size(); // получение размера категорий блюд из хэш-таблицы меню
-                int chooseId = random.nextInt(bound); // получение рандомного числа в заданном диапазоне
-                String dish = dc.dishesList.get(type).get(chooseId);
-                System.out.print(dish + " ");
-            }
-            System.out.println();
+        ArrayList<ArrayList<String>> dishCombos = dc.generateDishCombos(dishType, numberOfCombos);
+
+        for (int i = 0; i < dishCombos.size(); i++) {
+            System.out.println(dishCombos.get(i));
         }
-
-        // сгенерируйте комбинации блюд и выведите на экран
-
     }
 }
