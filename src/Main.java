@@ -57,21 +57,16 @@ public class Main {
         String nextItem = scanner.nextLine();
         ArrayList<String> dishType = new ArrayList<>();//реализуйте ввод типов блюд
         while (!nextItem.isEmpty()) {
-            nextItem = scanner.nextLine();
-            if (nextItem.isEmpty()) {
-                break;
+            //nextItem = scanner.nextLine();
+            if (!dc.checkType(nextItem)) {
+                System.out.println("Такого типа нет");
             } else {
-                if (!dc.checkType(nextItem)) {
-                    System.out.println("Такого типа нет");
-                } else {
-                    dishType.add(nextItem); // добавление типа в массив типов блюд
-                }
+                dishType.add(nextItem); // добавление типа в массив типов блюд
             }
             if (dishType.isEmpty()) {
                 System.out.println("Тип блюда не выбран");
-            } else {
-                continue;
             }
+            nextItem = scanner.nextLine();
         }
         ArrayList<ArrayList<String>> dishCombos = dc.generateDishCombos(dishType, numberOfCombos);
 
